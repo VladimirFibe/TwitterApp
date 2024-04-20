@@ -71,11 +71,64 @@ final class ProfileHeaderView: BaseView {
         $0.translatesAutoresizingMaskIntoConstraints = false
         return $0
     }(UILabel())
+    
+    private let followingTextLabel: UILabel = {
+        $0.text = "Following"
+        $0.font = .systemFont(ofSize: 14)
+        $0.textColor = .secondaryLabel
+        $0.translatesAutoresizingMaskIntoConstraints = false
+        return $0
+    }(UILabel())
+    
+    private let followingCountLabel: UILabel = {
+        $0.text = "314"
+        $0.font = .systemFont(ofSize: 14, weight: .bold)
+        $0.textColor = .label
+        $0.translatesAutoresizingMaskIntoConstraints = false
+        return $0
+    }(UILabel())
+    
+    private let followersTextLabel: UILabel = {
+        $0.text = "Followers"
+        $0.font = .systemFont(ofSize: 14)
+        $0.textColor = .secondaryLabel
+        $0.translatesAutoresizingMaskIntoConstraints = false
+        return $0
+    }(UILabel())
+    
+    private let followersCountLabel: UILabel = {
+        $0.text = "314"
+        $0.font = .systemFont(ofSize: 14, weight: .bold)
+        $0.textColor = .label
+        $0.translatesAutoresizingMaskIntoConstraints = false
+        return $0
+    }(UILabel())
+    
+    private lazy var sectionStackView: UIStackView = {
+        $0.translatesAutoresizingMaskIntoConstraints = false
+        $0.distribution = .equalSpacing
+        return $0
+    }(UIStackView())
+}
+
+extension ProfileHeaderView {
+    @objc private func buttonTapped(_ sender: UIButton) {
+        print(sender.tag, sender.titleLabel?.text ?? "")
+    }
 }
 
 extension ProfileHeaderView {
     override func setupViews() {
-        [headerImageView, avatarImageView, displayNameLabel, usernameLabel, bioLabel, linkImageView, linkLabel, joinImageView, joinLabel].forEach { addSubview($0)}
+        [headerImageView, avatarImageView, displayNameLabel, usernameLabel, bioLabel, linkImageView, linkLabel, joinImageView, joinLabel, followingTextLabel, followingCountLabel, followersTextLabel, followersCountLabel, sectionStackView].forEach { addSubview($0)}
+        for (index, title) in ["Tweets", "Tweets & Replies", "Media", "Likes"].enumerated() {
+            let button = UIButton(type: .system)
+            button.setTitle(title, for: [])
+            button.titleLabel?.font = .systemFont(ofSize: 16, weight: .bold)
+            button.tintColor = .label
+            button.tag = index
+            button.addTarget(self, action: #selector(buttonTapped), for: .primaryActionTriggered)
+            sectionStackView.addArrangedSubview(button)
+        }
     }
     
     override func setupConstraints() {
@@ -111,7 +164,23 @@ extension ProfileHeaderView {
             joinImageView.leadingAnchor.constraint(equalTo: linkLabel.trailingAnchor, constant: 20),
             
             joinLabel.centerYAnchor.constraint(equalTo: linkImageView.centerYAnchor),
-            joinLabel.leadingAnchor.constraint(equalTo: joinImageView.trailingAnchor, constant: 10)
+            joinLabel.leadingAnchor.constraint(equalTo: joinImageView.trailingAnchor, constant: 10),
+            
+            followingCountLabel.leadingAnchor.constraint(equalTo: displayNameLabel.leadingAnchor),
+            followingCountLabel.topAnchor.constraint(equalTo: linkImageView.bottomAnchor, constant: 10),
+            
+            followingTextLabel.leadingAnchor.constraint(equalTo: followingCountLabel.trailingAnchor, constant: 4),
+            followingTextLabel.centerYAnchor.constraint(equalTo: followingCountLabel.centerYAnchor),
+            
+            followersCountLabel.leadingAnchor.constraint(equalTo: followingTextLabel.trailingAnchor, constant: 8),
+            followersCountLabel.centerYAnchor.constraint(equalTo: followingCountLabel.centerYAnchor),
+            
+            followersTextLabel.leadingAnchor.constraint(equalTo: followersCountLabel.trailingAnchor, constant: 4),
+            followersTextLabel.centerYAnchor.constraint(equalTo: followingCountLabel.centerYAnchor),
+            
+            sectionStackView.leadingAnchor.constraint(equalTo: displayNameLabel.leadingAnchor),
+            sectionStackView.trailingAnchor.constraint(equalTo: displayNameLabel.trailingAnchor),
+            sectionStackView.topAnchor.constraint(equalTo: followersTextLabel.bottomAnchor, constant: 10)
         ])
     }
 }
