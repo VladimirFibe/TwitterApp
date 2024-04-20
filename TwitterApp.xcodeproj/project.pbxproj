@@ -15,6 +15,7 @@
 		E85D27C42BD387BE008F4E7E /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E85D27C32BD387BE008F4E7E /* ProfileViewController.swift */; };
 		E85D27C72BD38FD2008F4E7E /* BaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E85D27C62BD38FD2008F4E7E /* BaseView.swift */; };
 		E85D27C92BD3901E008F4E7E /* ProfileHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E85D27C82BD3901E008F4E7E /* ProfileHeaderView.swift */; };
+		E85D27CB2BD3F803008F4E7E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E85D27CA2BD3F803008F4E7E /* GoogleService-Info.plist */; };
 		E8F719AF2BD34BA60048BAB5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8F719AE2BD34BA60048BAB5 /* AppDelegate.swift */; };
 		E8F719B12BD34BA60048BAB5 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8F719B02BD34BA60048BAB5 /* SceneDelegate.swift */; };
 		E8F719B32BD34BA60048BAB5 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8F719B22BD34BA60048BAB5 /* ViewController.swift */; };
@@ -31,6 +32,7 @@
 		E85D27C32BD387BE008F4E7E /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		E85D27C62BD38FD2008F4E7E /* BaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseView.swift; sourceTree = "<group>"; };
 		E85D27C82BD3901E008F4E7E /* ProfileHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeaderView.swift; sourceTree = "<group>"; };
+		E85D27CA2BD3F803008F4E7E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		E8F719AB2BD34BA60048BAB5 /* TwitterApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TwitterApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E8F719AE2BD34BA60048BAB5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E8F719B02BD34BA60048BAB5 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -110,6 +112,7 @@
 				E8F719B72BD34BA60048BAB5 /* Assets.xcassets */,
 				E8F719B92BD34BA60048BAB5 /* LaunchScreen.storyboard */,
 				E8F719BC2BD34BA60048BAB5 /* Info.plist */,
+				E85D27CA2BD3F803008F4E7E /* GoogleService-Info.plist */,
 			);
 			path = TwitterApp;
 			sourceTree = "<group>";
@@ -174,6 +177,7 @@
 			files = (
 				E8F719B82BD34BA60048BAB5 /* Assets.xcassets in Resources */,
 				E8F719BB2BD34BA60048BAB5 /* Base in Resources */,
+				E85D27CB2BD3F803008F4E7E /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
