@@ -36,7 +36,37 @@ final class ProfileHeaderView: BaseView {
     private let bioLabel: UILabel = {
         $0.text = "Urgent help for iPhone, iPad, MacBook, iMac, Mac Pro, Mac mini. Urgent help for iPhone, iPad, MacBook, iMac, Mac Pro, Mac mini."
         $0.font = .systemFont(ofSize: 18)
-        $0.numberOfLines = 0
+        $0.numberOfLines = 3
+        $0.textColor = .label
+        $0.translatesAutoresizingMaskIntoConstraints = false
+        return $0
+    }(UILabel())
+    
+    private let linkImageView: UIImageView = {
+        $0.translatesAutoresizingMaskIntoConstraints = false
+        $0.tintColor = .secondaryLabel
+        $0.image = UIImage(systemName: "link", withConfiguration: UIImage.SymbolConfiguration(pointSize: 14))
+        return $0
+    }(UIImageView())
+    
+    private let linkLabel: UILabel = {
+        $0.text = "macservice.kz"
+        $0.font = .systemFont(ofSize: 14)
+        $0.textColor = .label
+        $0.translatesAutoresizingMaskIntoConstraints = false
+        return $0
+    }(UILabel())
+    
+    private let joinImageView: UIImageView = {
+        $0.translatesAutoresizingMaskIntoConstraints = false
+        $0.tintColor = .secondaryLabel
+        $0.image = UIImage(systemName: "calendar", withConfiguration: UIImage.SymbolConfiguration(pointSize: 14))
+        return $0
+    }(UIImageView())
+    
+    private let joinLabel: UILabel = {
+        $0.text = "2010"
+        $0.font = .systemFont(ofSize: 14)
         $0.textColor = .label
         $0.translatesAutoresizingMaskIntoConstraints = false
         return $0
@@ -45,7 +75,7 @@ final class ProfileHeaderView: BaseView {
 
 extension ProfileHeaderView {
     override func setupViews() {
-        [headerImageView, avatarImageView, displayNameLabel, usernameLabel, bioLabel].forEach { addSubview($0)}
+        [headerImageView, avatarImageView, displayNameLabel, usernameLabel, bioLabel, linkImageView, linkLabel, joinImageView, joinLabel].forEach { addSubview($0)}
     }
     
     override func setupConstraints() {
@@ -69,7 +99,19 @@ extension ProfileHeaderView {
             
             bioLabel.leadingAnchor.constraint(equalTo: displayNameLabel.leadingAnchor),
             bioLabel.trailingAnchor.constraint(equalTo: displayNameLabel.trailingAnchor),
-            bioLabel.topAnchor.constraint(equalTo: usernameLabel.bottomAnchor, constant: 5)
+            bioLabel.topAnchor.constraint(equalTo: usernameLabel.bottomAnchor, constant: 5),
+            
+            linkImageView.topAnchor.constraint(equalTo: bioLabel.bottomAnchor, constant: 5),
+            linkImageView.leadingAnchor.constraint(equalTo: bioLabel.leadingAnchor),
+            
+            linkLabel.centerYAnchor.constraint(equalTo: linkImageView.centerYAnchor),
+            linkLabel.leadingAnchor.constraint(equalTo: linkImageView.trailingAnchor, constant: 10),
+            
+            joinImageView.centerYAnchor.constraint(equalTo: linkImageView.centerYAnchor),
+            joinImageView.leadingAnchor.constraint(equalTo: linkLabel.trailingAnchor, constant: 20),
+            
+            joinLabel.centerYAnchor.constraint(equalTo: linkImageView.centerYAnchor),
+            joinLabel.leadingAnchor.constraint(equalTo: joinImageView.trailingAnchor, constant: 10)
         ])
     }
 }
