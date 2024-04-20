@@ -16,7 +16,26 @@ extension HomeViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: HomeCell.identifier, for: indexPath) as? HomeCell else { fatalError() }
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: HomeCell.identifier, for: indexPath) as? HomeCell else { return UITableViewCell() }
+        cell.delegate = self
         return cell
+    }
+}
+
+extension HomeViewController: HomeCellDelegate {
+    func homeCellDidTapReply() {
+        print(#function)
+    }
+    
+    func homeCellDidTapRetweet() {
+        print(#function)
+    }
+    
+    func homeCellDidTapLike() {
+        print(#function)
+    }
+    
+    func homeCellDidTapShare() {
+        print(#function)
     }
 }
