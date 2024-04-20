@@ -1,6 +1,15 @@
 import UIKit
 
 final class ProfileHeaderView: BaseView {
+    private var selectedTab: Int = 0 {
+        didSet {
+            for (index, view) in sectionStackView.arrangedSubviews.enumerated() {
+                guard let button = view as? UIButton else { return }
+                button.tintColor = index == selectedTab ? .label : .secondaryLabel
+            }
+        }
+    }
+    
     private let headerImageView: UIImageView = {
         $0.image = .header
         $0.contentMode = .scaleAspectFill
@@ -113,7 +122,7 @@ final class ProfileHeaderView: BaseView {
 
 extension ProfileHeaderView {
     @objc private func buttonTapped(_ sender: UIButton) {
-        print(sender.tag, sender.titleLabel?.text ?? "")
+        selectedTab = sender.tag
     }
 }
 
@@ -124,11 +133,12 @@ extension ProfileHeaderView {
             let button = UIButton(type: .system)
             button.setTitle(title, for: [])
             button.titleLabel?.font = .systemFont(ofSize: 16, weight: .bold)
-            button.tintColor = .label
+            button.tintColor = .secondaryLabel
             button.tag = index
             button.addTarget(self, action: #selector(buttonTapped), for: .primaryActionTriggered)
             sectionStackView.addArrangedSubview(button)
         }
+        selectedTab = 0
     }
     
     override func setupConstraints() {
