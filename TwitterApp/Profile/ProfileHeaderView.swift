@@ -4,8 +4,13 @@ final class ProfileHeaderView: BaseView {
     private var selectedTab: Int = 0 {
         didSet {
             for (index, view) in sectionStackView.arrangedSubviews.enumerated() {
-                guard let button = view as? UIButton else { return }
-                button.tintColor = index == selectedTab ? .label : .secondaryLabel
+                UIView.animate(withDuration: 0.3) { [weak self] in
+                    guard let self else { return }
+                    view.tintColor = index == self.selectedTab ? .label : .secondaryLabel
+                    leadingAnchors[index].isActive = self.selectedTab == index
+                    trailingAnchors[index].isActive = self.selectedTab == index
+                    self.layoutIfNeeded()
+                }
             }
         }
     }
@@ -43,7 +48,7 @@ final class ProfileHeaderView: BaseView {
     }(UILabel())
     
     private let bioLabel: UILabel = {
-        $0.text = "Urgent help for iPhone, iPad, MacBook, iMac, Mac Pro, Mac mini. Urgent help for iPhone, iPad, MacBook, iMac, Mac Pro, Mac mini."
+        $0.text = "Urgent help for iPhone, iPad, MacBook, iMac, Mac Pro, Mac mini."
         $0.font = .systemFont(ofSize: 18)
         $0.numberOfLines = 3
         $0.textColor = .label
@@ -118,6 +123,15 @@ final class ProfileHeaderView: BaseView {
         $0.distribution = .equalSpacing
         return $0
     }(UIStackView())
+    
+    private let indicatorView: UIView = {
+        $0.translatesAutoresizingMaskIntoConstraints = false
+        $0.backgroundColor = .label
+        return $0
+    }(UIView())
+    
+    private var leadingAnchors: [NSLayoutConstraint] = []
+    private var trailingAnchors: [NSLayoutConstraint] = []
 }
 
 extension ProfileHeaderView {
@@ -128,17 +142,34 @@ extension ProfileHeaderView {
 
 extension ProfileHeaderView {
     override func setupViews() {
-        [headerImageView, avatarImageView, displayNameLabel, usernameLabel, bioLabel, linkImageView, linkLabel, joinImageView, joinLabel, followingTextLabel, followingCountLabel, followersTextLabel, followersCountLabel, sectionStackView].forEach { addSubview($0)}
+        [headerImageView, 
+         avatarImageView,
+         displayNameLabel,
+         usernameLabel,
+         bioLabel,
+         linkImageView,
+         linkLabel,
+         joinImageView,
+         joinLabel,
+         followingTextLabel,
+         followingCountLabel,
+         followersTextLabel,
+         followersCountLabel,
+         sectionStackView,
+         indicatorView].forEach { addSubview($0)}
+        
         for (index, title) in ["Tweets", "Tweets & Replies", "Media", "Likes"].enumerated() {
             let button = UIButton(type: .system)
             button.setTitle(title, for: [])
             button.titleLabel?.font = .systemFont(ofSize: 16, weight: .bold)
-            button.tintColor = .secondaryLabel
+            button.tintColor = index == 0 ? .label : .secondaryLabel
             button.tag = index
             button.addTarget(self, action: #selector(buttonTapped), for: .primaryActionTriggered)
+            button.translatesAutoresizingMaskIntoConstraints = false
+            leadingAnchors.append(indicatorView.leadingAnchor.constraint(equalTo: button.leadingAnchor))
+            trailingAnchors.append(indicatorView.trailingAnchor.constraint(equalTo: button.trailingAnchor))
             sectionStackView.addArrangedSubview(button)
         }
-        selectedTab = 0
     }
     
     override func setupConstraints() {
@@ -190,7 +221,12 @@ extension ProfileHeaderView {
             
             sectionStackView.leadingAnchor.constraint(equalTo: displayNameLabel.leadingAnchor),
             sectionStackView.trailingAnchor.constraint(equalTo: displayNameLabel.trailingAnchor),
-            sectionStackView.topAnchor.constraint(equalTo: followersTextLabel.bottomAnchor, constant: 10)
+            sectionStackView.topAnchor.constraint(equalTo: followersTextLabel.bottomAnchor, constant: 10),
+            
+            indicatorView.topAnchor.constraint(equalTo: sectionStackView.bottomAnchor),
+            indicatorView.heightAnchor.constraint(equalToConstant: 4),
+            leadingAnchors[0],
+            trailingAnchors[0]
         ])
     }
 }

@@ -20,7 +20,7 @@ final class HomeCell: BaseTableViewCell {
     }(UIImageView())
     
     private let displayNameLabel: UILabel = {
-        $0.text = "Vladimir Vladimir Vladimir Vladimir Vladimir"
+        $0.text = "Vladimir"
         $0.font = .systemFont(ofSize: 18, weight: .bold)
         $0.textColor = .label
         $0.translatesAutoresizingMaskIntoConstraints = false
