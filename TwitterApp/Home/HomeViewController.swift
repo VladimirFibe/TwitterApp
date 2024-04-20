@@ -1,24 +1,22 @@
 import UIKit
 
 final class HomeViewController: BaseTableViewController {
-    var tweets = ["one", "two", "three"]
 }
 
 extension HomeViewController {
     override func setupViews() {
         super.setupViews()
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
+        tableView.register(HomeCell.self, forCellReuseIdentifier: HomeCell.identifier)
     }
 }
 
 extension HomeViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        tweets.count
+        10
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
-        cell.textLabel?.text = tweets[indexPath.row]
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: HomeCell.identifier, for: indexPath) as? HomeCell else { fatalError() }
         return cell
     }
 }
